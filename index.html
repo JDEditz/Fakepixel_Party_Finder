@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakePixel Party Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="pixel-text">🎮 FakePixel Party Finder</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" onclick="showPage('home')">Home</button>
+                <button class="nav-btn" onclick="showPage('create')">Create Party</button>
+                <button class="nav-btn" onclick="showPage('browser')">Find Party</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">Find Your Perfect Dungeon Party</h1>
+                <p class="hero-subtitle">Connect with skilled players for Hypixel SkyBlock Dungeons</p>
+                <button class="cta-button" onclick="showPage('browser')">Find a Party</button>
+            </div>
+
+            <div class="quick-filters">
+                <h2>Quick Filters</h2>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Floor</label>
+                        <select id="quick-floor">
+                            <option value="">Any Floor</option>
+                            <option value="F1">Floor 1</option>
+                            <option value="F2">Floor 2</option>
+                            <option value="F3">Floor 3</option>
+                            <option value="F4">Floor 4</option>
+                            <option value="F5">Floor 5</option>
+                            <option value="F6">Floor 6</option>
+                            <option value="F7">Floor 7</option>
+                            <option value="M1">Master 1</option>
+                            <option value="M2">Master 2</option>
+                            <option value="M3">Master 3</option>
+                            <option value="M4">Master 4</option>
+                            <option value="M5">Master 5</option>
+                            <option value="M6">Master 6</option>
+                            <option value="M7">Master 7</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Needed Class</label>
+                        <select id="quick-class">
+                            <option value="">Any Class</option>
+                            <option value="Tank">🛡️ Tank</option>
+                            <option value="Healer">❤️ Healer</option>
+                            <option value="Mage">🔮 Mage</option>
+                            <option value="Berserker">⚔️ Berserker</option>
+                            <option value="Archer">🏹 Archer</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Party Type</label>
+                        <select id="quick-type">
+                            <option value="">Any Type</option>
+                            <option value="S+ Run">S+ Run</option>
+                            <option value="XP Run">XP Run</option>
+                            <option value="Carry">Carry</option>
+                            <option value="Secret Practice">Secret Practice</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="filter-apply-btn" onclick="applyQuickFilters()">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Party Page -->
+    <div id="create-page" class="page">
+        <div class="container">
+            <h1>Create New Party</h1>
+            <form class="create-form" onsubmit="createParty(event)">
+                <div class="form-group">
+                    <label>Party Leader Name</label>
+                    <input type="text" id="leader-name" required placeholder="Enter your IGN">
+                </div>
+
+                <div class="form-group">
+                    <label>Dungeon Floor</label>
+                    <select id="floor-select" required>
+                        <option value="">Select Floor</option>
+                        <option value="F1">Floor 1</option>
+                        <option value="F2">Floor 2</option>
+                        <option value="F3">Floor 3</option>
+                        <option value="F4">Floor 4</option>
+                        <option value="F5">Floor 5</option>
+                        <option value="F6">Floor 6</option>
+                        <option value="F7">Floor 7</option>
+                        <option value="M1">Master 1</option>
+                        <option value="M2">Master 2</option>
+                        <option value="M3">Master 3</option>
+                        <option value="M4">Master 4</option>
+                        <option value="M5">Master 5</option>
+                        <option value="M6">Master 6</option>
+                        <option value="M7">Master 7</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Party Type</label>
+                    <select id="party-type" required>
+                        <option value="">Select Type</option>
+                        <option value="S+ Run">S+ Run</option>
+                        <option value="XP Run">XP Run</option>
+                        <option value="Carry">Carry</option>
+                        <option value="Secret Practice">Secret Practice</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Needed Classes</label>
+                    <div class="class-checkboxes">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="needed-classes" value="Tank">
+                            <span class="class-icon">🛡️</span> Tank
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="needed-classes" value="Healer">
+                            <span class="class-icon">❤️</span> Healer
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="needed-classes" value="Mage">
+                            <span class="class-icon">🔮</span> Mage
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="needed-classes" value="Berserker">
+                            <span class="class-icon">⚔️</span> Berserker
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="needed-classes" value="Archer">
+                            <span class="class-icon">🏹</span> Archer
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Requirements (Optional)</label>
+                    <input type="text" id="requirements" placeholder="e.g., Cata 30+, Hyperion, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label>Party Notes (Optional)</label>
+                    <textarea id="party-notes" placeholder="Additional information about the party..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Party</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Party Browser Page -->
+    <div id="browser-page" class="page">
+        <div class="container">
+            <h1>Active Parties</h1>
+            
+            <div class="browser-filters">
+                <select id="filter-floor">
+                    <option value="">All Floors</option>
+                    <option value="F1">Floor 1</option>
+                    <option value="F2">Floor 2</option>
+                    <option value="F3">Floor 3</option>
+                    <option value="F4">Floor 4</option>
+                    <option value="F5">Floor 5</option>
+                    <option value="F6">Floor 6</option>
+                    <option value="F7">Floor 7</option>
+                    <option value="M1">Master 1</option>
+                    <option value="M2">Master 2</option>
+                    <option value="M3">Master 3</option>
+                    <option value="M4">Master 4</option>
+                    <option value="M5">Master 5</option>
+                    <option value="M6">Master 6</option>
+                    <option value="M7">Master 7</option>
+                </select>
+                
+                <select id="filter-class">
+                    <option value="">All Classes</option>
+                    <option value="Tank">🛡️ Tank</option>
+                    <option value="Healer">❤️ Healer</option>
+                    <option value="Mage">🔮 Mage</option>
+                    <option value="Berserker">⚔️ Berserker</option>
+                    <option value="Archer">🏹 Archer</option>
+                </select>
+                
+                <select id="filter-type">
+                    <option value="">All Types</option>
+                    <option value="S+ Run">S+ Run</option>
+                    <option value="XP Run">XP Run</option>
+                    <option value="Carry">Carry</option>
+                    <option value="Secret Practice">Secret Practice</option>
+                </select>
+                
+                <button onclick="filterParties()">Filter</button>
+            </div>
+
+            <div id="parties-list" class="parties-grid">
+                <!-- Parties will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Party Room Page -->
+    <div id="party-room-page" class="page">
+        <div class="container">
+            <div id="party-room-content">
+                <!-- Party room content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
